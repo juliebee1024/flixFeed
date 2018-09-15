@@ -76,10 +76,20 @@ class MoviesViewController: UIViewController, UITableViewDataSource
         task.resume()
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let cell = sender as! UITableViewCell
+        if let indexPath = tableView.indexPath(for: cell)
+        {
+            let movie = movies[indexPath.row]
+            let detailViewController = segue.destination as! DetailViewController
+            detailViewController.movie = movie
+        }
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
         //return 10; //10 rows -> row 0 to row 9
-        return movies.count;
+        return movies.count
     }
     
     
